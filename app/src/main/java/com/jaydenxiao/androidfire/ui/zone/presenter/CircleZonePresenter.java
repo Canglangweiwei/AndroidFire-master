@@ -123,7 +123,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
      *
      * @param circleId
      */
-    MDAlertDialog mdAlertDialog;
+    private MDAlertDialog mdAlertDialog;
 
     @Override
     public void deleteCircle(final String circleId, final int position) {
