@@ -39,71 +39,74 @@ import java.util.TimerTask;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
-/**
- * Created by Nathen on 16/7/30.
- */
-public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayerListener, View.OnClickListener, SeekBar.OnSeekBarChangeListener, View.OnTouchListener, TextureView.SurfaceTextureListener {
+@SuppressWarnings("ALL")
+public abstract class JCVideoPlayer extends FrameLayout
+        implements JCMediaPlayerListener,
+        View.OnClickListener,
+        SeekBar.OnSeekBarChangeListener,
+        View.OnTouchListener,
+        TextureView.SurfaceTextureListener {
 
     public static final String TAG = "JieCaoVideoPlayer";
 
-    public static final int FULLSCREEN_ID            = 33797;
-    public static final int TINY_ID                  = 33798;
-    public static final int THRESHOLD                = 80;
+    public static final int FULLSCREEN_ID = 33797;
+    public static final int TINY_ID = 33798;
+    public static final int THRESHOLD = 80;
     public static final int FULL_SCREEN_NORMAL_DELAY = 500;
 
-    public static boolean ACTION_BAR_EXIST           = true;
-    public static boolean TOOL_BAR_EXIST             = true;
-    public static boolean WIFI_TIP_DIALOG_SHOWED     = false;
-    public static long    CLICK_QUIT_FULLSCREEN_TIME = 0;
+    public static boolean ACTION_BAR_EXIST = true;
+    public static boolean TOOL_BAR_EXIST = true;
+    public static boolean WIFI_TIP_DIALOG_SHOWED = false;
+    public static long CLICK_QUIT_FULLSCREEN_TIME = 0;
 
-    public static final int SCREEN_LAYOUT_LIST       = 0;
+    public static final int SCREEN_LAYOUT_LIST = 0;
     public static final int SCREEN_WINDOW_FULLSCREEN = 1;
-    public static final int SCREEN_WINDOW_TINY       = 2;
-    public static final int SCREEN_LAYOUT_DETAIL     = 3;
+    public static final int SCREEN_WINDOW_TINY = 2;
+    public static final int SCREEN_LAYOUT_DETAIL = 3;
 
-    public static final int CURRENT_STATE_NORMAL                  = 0;
-    public static final int CURRENT_STATE_PREPARING               = 1;
-    public static final int CURRENT_STATE_PLAYING                 = 2;
+    public static final int CURRENT_STATE_NORMAL = 0;
+    public static final int CURRENT_STATE_PREPARING = 1;
+    public static final int CURRENT_STATE_PLAYING = 2;
     public static final int CURRENT_STATE_PLAYING_BUFFERING_START = 3;
-    public static final int CURRENT_STATE_PAUSE                   = 5;
-    public static final int CURRENT_STATE_AUTO_COMPLETE           = 6;
-    public static final int CURRENT_STATE_ERROR                   = 7;
+    public static final int CURRENT_STATE_PAUSE = 5;
+    public static final int CURRENT_STATE_AUTO_COMPLETE = 6;
+    public static final int CURRENT_STATE_ERROR = 7;
 
-    public int currentState  = -1;
+    public int currentState = -1;
     public int currentScreen = -1;
 
 
-    public String              url             = null;
-    public Object[]            objects         = null;
-    public boolean             looping         = false;
-    public Map<String, String> mapHeadData     = new HashMap<>();
-    public int                 seekToInAdvance = -1;
+    public String url = null;
+    public Object[] objects = null;
+    public boolean looping = false;
+    public Map<String, String> mapHeadData = new HashMap<>();
+    public int seekToInAdvance = -1;
 
     public ImageView startButton;
-    public SeekBar   progressBar;
+    public SeekBar progressBar;
     public ImageView fullscreenButton;
-    public TextView  currentTimeTextView, totalTimeTextView;
+    public TextView currentTimeTextView, totalTimeTextView;
     public ViewGroup textureViewContainer;
     public ViewGroup topContainer, bottomContainer;
     public Surface surface;
 
     protected static JCBuriedPoint JC_BURIED_POINT;
-    protected static Timer         UPDATE_PROGRESS_TIMER;
+    protected static Timer UPDATE_PROGRESS_TIMER;
 
-    protected int               mScreenWidth;
-    protected int               mScreenHeight;
-    protected AudioManager      mAudioManager;
-    protected Handler           mHandler;
+    protected int mScreenWidth;
+    protected int mScreenHeight;
+    protected AudioManager mAudioManager;
+    protected Handler mHandler;
     protected ProgressTimerTask mProgressTimerTask;
 
     protected boolean mTouchingProgressBar;
-    protected float   mDownX;
-    protected float   mDownY;
+    protected float mDownX;
+    protected float mDownY;
     protected boolean mChangeVolume;
     protected boolean mChangePosition;
-    protected int     mDownPosition;
-    protected int     mGestureDownVolume;
-    protected int     mSeekTimePosition;
+    protected int mDownPosition;
+    protected int mGestureDownVolume;
+    protected int mSeekTimePosition;
 
     public JCVideoPlayer(Context context) {
         super(context);
@@ -548,7 +551,6 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
     @Override
     public void onVideoSizeChanged() {
         Log.i(TAG, "onVideoSizeChanged " + " [" + this.hashCode() + "] ");
-
         int mVideoWidth = JCMediaManager.instance().currentVideoWidth;
         int mVideoHeight = JCMediaManager.instance().currentVideoHeight;
         if (mVideoWidth != 0 && mVideoHeight != 0) {
@@ -696,13 +698,11 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
             mJcVideoPlayer.addTextureView();
             JCVideoPlayerManager.setLastListener(this);
             JCVideoPlayerManager.setListener(mJcVideoPlayer);
-
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public class ProgressTimerTask extends TimerTask {
@@ -906,7 +906,6 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
                     JCVideoPlayerManager.listener().autoQuitFullscreen();
                 }
             }
-
         }
 
         @Override
@@ -934,8 +933,5 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
 
     }
 
-
     public abstract int getLayoutId();
-
-
 }

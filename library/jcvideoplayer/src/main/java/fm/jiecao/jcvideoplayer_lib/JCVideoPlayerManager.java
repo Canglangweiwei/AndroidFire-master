@@ -7,17 +7,8 @@ import java.lang.ref.WeakReference;
  * From a JCVideoPlayer to another JCVideoPlayer
  * Created by Nathen on 16/7/26.
  */
+@SuppressWarnings("ALL")
 public class JCVideoPlayerManager {
-
-//    public static void changeJCVideoPlayer(JCVideoPlayer from, JCVideoPlayer to) {
-//        //pass state screen
-//
-//    }
-//
-//    public static void createJCVideoPlayer(ViewGroup viewGroup, ViewGroup.LayoutParams params
-//            , JCVideoPlayer jcVideoPlayer) {
-//
-//    }
 
     private static WeakReference<JCMediaPlayerListener> LISTENER;
     private static WeakReference<JCMediaPlayerListener> LAST_LISTENER;

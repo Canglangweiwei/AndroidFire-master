@@ -22,28 +22,31 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
  * Created by Nathen
  * On 2015/11/30 15:39
  */
-public class JCMediaManager implements IMediaPlayer.OnPreparedListener, IMediaPlayer.OnCompletionListener,
-        IMediaPlayer.OnBufferingUpdateListener, IMediaPlayer.OnSeekCompleteListener, IMediaPlayer.OnErrorListener,
+@SuppressWarnings("ALL")
+public class JCMediaManager implements IMediaPlayer.OnPreparedListener,
+        IMediaPlayer.OnCompletionListener, IMediaPlayer.OnBufferingUpdateListener,
+        IMediaPlayer.OnSeekCompleteListener, IMediaPlayer.OnErrorListener,
         IMediaPlayer.OnVideoSizeChangedListener, IMediaPlayer.OnInfoListener {
+
     public static String TAG = "JieCaoVideoPlayer";
 
     private static JCMediaManager JCMediaManager;
-    public         IjkMediaPlayer mediaPlayer;
-    public static  JCResizeTextureView textureView;
+    public IjkMediaPlayer mediaPlayer;
+    public static JCResizeTextureView textureView;
 
-    public int currentVideoWidth  = 0;
+    public int currentVideoWidth = 0;
     public int currentVideoHeight = 0;
     public int lastState;
     public int bufferPercent;
     public int backUpBufferState = -1;
     public int videoRotation;
 
-    public static final int HANDLER_PREPARE    = 0;
+    public static final int HANDLER_PREPARE = 0;
     public static final int HANDLER_SETDISPLAY = 1;
-    public static final int HANDLER_RELEASE    = 2;
+    public static final int HANDLER_RELEASE = 2;
     HandlerThread mMediaHandlerThread;
-    MediaHandler  mMediaHandler;
-    Handler       mainThreadHandler;
+    MediaHandler mMediaHandler;
+    Handler mainThreadHandler;
 
     public static JCMediaManager instance() {
         if (JCMediaManager == null) {
@@ -60,7 +63,7 @@ public class JCMediaManager implements IMediaPlayer.OnPreparedListener, IMediaPl
         mainThreadHandler = new Handler();
     }
 
-    public Point getVideoSize(){
+    public Point getVideoSize() {
         return new Point(currentVideoWidth, currentVideoHeight);
     }
 
@@ -112,7 +115,6 @@ public class JCMediaManager implements IMediaPlayer.OnPreparedListener, IMediaPl
             }
         }
     }
-
 
     public void prepare(final String url, final Map<String, String> mapHeadData, boolean loop) {
         if (TextUtils.isEmpty(url)) return;
@@ -224,11 +226,10 @@ public class JCMediaManager implements IMediaPlayer.OnPreparedListener, IMediaPl
         });
     }
 
-
     private class FuckBean {
-        String              url;
+        String url;
         Map<String, String> mapHeadData;
-        boolean             looping;
+        boolean looping;
 
         FuckBean(String url, Map<String, String> mapHeadData, boolean loop) {
             this.url = url;

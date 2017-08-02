@@ -32,18 +32,17 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
 
     protected static Timer DISMISS_CONTROL_VIEW_TIMER;
 
-    public ImageView   backButton;
+    public ImageView backButton;
     public ProgressBar bottomProgressBar, loadingProgressBar;
-    public TextView  titleTextView;
+    public TextView titleTextView;
     public ImageView thumbImageView;
     public ImageView coverImageView;
     public ImageView tinyBackImageView;
 
-    private static Bitmap  pauseSwitchCoverBitmap = null;
-    private static boolean isRefreshCover         = false;
+    private static Bitmap pauseSwitchCoverBitmap = null;
+    private static boolean isRefreshCover = false;
 
     protected DismissControlViewTimerTask mDismissControlViewTimerTask;
-
 
     public JCVideoPlayerStandard(Context context) {
         super(context);
@@ -67,7 +66,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         thumbImageView.setOnClickListener(this);
         backButton.setOnClickListener(this);
         tinyBackImageView.setOnClickListener(this);
-
     }
 
     @Override
@@ -241,13 +239,14 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         return b;
     }
 
-
     public void refreshCover(Bitmap bitmap) {
         if (pauseSwitchCoverBitmap != null) {
             JCVideoPlayerStandard jcVideoPlayerStandard = ((JCVideoPlayerStandard) JCVideoPlayerManager.listener());
-            jcVideoPlayerStandard.coverImageView.setBackgroundColor(Color.parseColor("#000000"));
-            jcVideoPlayerStandard.coverImageView.setImageBitmap(bitmap);
-            jcVideoPlayerStandard.coverImageView.setVisibility(VISIBLE);
+            if (jcVideoPlayerStandard != null) {
+                jcVideoPlayerStandard.coverImageView.setBackgroundColor(Color.parseColor("#000000"));
+                jcVideoPlayerStandard.coverImageView.setImageBitmap(bitmap);
+                jcVideoPlayerStandard.coverImageView.setVisibility(VISIBLE);
+            }
         }
     }
 
@@ -373,7 +372,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToPreparingClear() {
@@ -389,7 +387,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToPlayingShow() {
@@ -407,7 +404,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToPlayingClear() {
@@ -423,7 +419,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToPauseShow() {
@@ -441,7 +436,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToPauseClear() {
@@ -457,7 +451,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToPlayingBufferingShow() {
@@ -473,7 +466,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToPlayingBufferingClear() {
@@ -491,7 +483,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToCompleteShow() {
@@ -509,7 +500,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToCompleteClear() {
@@ -527,7 +517,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void changeUiToError() {
@@ -545,7 +534,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_WINDOW_TINY:
                 break;
         }
-
     }
 
     public void setAllControlsVisible(int topCon, int bottomCon, int startBtn, int loadingPro,
@@ -569,11 +557,11 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         }
     }
 
-    protected Dialog      mProgressDialog;
+    protected Dialog mProgressDialog;
     protected ProgressBar mDialogProgressBar;
-    protected TextView    mDialogSeekTime;
-    protected TextView    mDialogTotalTime;
-    protected ImageView   mDialogIcon;
+    protected TextView mDialogSeekTime;
+    protected TextView mDialogTotalTime;
+    protected ImageView mDialogIcon;
 
     @Override
     public void showProgressDialog(float deltaX, String seekTime, int seekTimePosition, String totalTime, int totalTimeDuration) {
@@ -609,7 +597,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         } else {
             mDialogIcon.setBackgroundResource(R.drawable.jc_backward_icon);
         }
-
     }
 
     @Override
@@ -620,8 +607,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         }
     }
 
-
-    protected Dialog      mVolumeDialog;
+    protected Dialog mVolumeDialog;
     protected ProgressBar mDialogVolumeProgressBar;
 
     @Override
@@ -646,7 +632,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         if (!mVolumeDialog.isShowing()) {
             mVolumeDialog.show();
         }
-
         mDialogVolumeProgressBar.setProgress(volumePercent);
     }
 
@@ -672,7 +657,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         if (mDismissControlViewTimerTask != null) {
             mDismissControlViewTimerTask.cancel();
         }
-
     }
 
     public class DismissControlViewTimerTask extends TimerTask {

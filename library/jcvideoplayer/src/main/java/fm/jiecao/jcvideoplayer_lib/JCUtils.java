@@ -15,6 +15,7 @@ import java.util.Locale;
  * Created by Nathen
  * On 2016/02/21 12:25
  */
+@SuppressWarnings("ALL")
 public class JCUtils {
 
     public static String stringForTime(int timeMs) {

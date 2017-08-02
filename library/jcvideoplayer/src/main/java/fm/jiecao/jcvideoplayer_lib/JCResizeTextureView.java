@@ -14,7 +14,9 @@ import android.view.TextureView;
  * Created by Nathen
  * On 2016/06/02 00:01
  */
+@SuppressWarnings("ALL")
 public class JCResizeTextureView extends TextureView {
+
     private static final String TAG = "JCResizeTextureView";
     private static final boolean DEBUG = false;
 
