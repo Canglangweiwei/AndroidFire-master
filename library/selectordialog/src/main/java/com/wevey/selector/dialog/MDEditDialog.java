@@ -15,9 +15,7 @@ import android.widget.TextView;
 
 import com.weavey.utils.ScreenSizeUtils;
 
-/**
- * Created by Weavey on 2016/9/4.
- */
+@SuppressWarnings("ALL")
 public class MDEditDialog implements View.OnClickListener, DialogInterface.OnDismissListener {
 
     private Dialog mDialog;
@@ -52,19 +50,14 @@ public class MDEditDialog implements View.OnClickListener, DialogInterface.OnDis
         lp.gravity = Gravity.CENTER;
         dialogWindow.setAttributes(lp);
         initDialog();
-
     }
 
     private void initDialog() {
-
         mDialog.setOnDismissListener(this);
         mDialog.setCanceledOnTouchOutside(mBuilder.isTouchOutside());
-
         if (mBuilder.getTitleVisible()) {
-
             mTitle.setVisibility(View.VISIBLE);
         } else {
-
             mTitle.setVisibility(View.GONE);
         }
 
@@ -88,52 +81,38 @@ public class MDEditDialog implements View.OnClickListener, DialogInterface.OnDis
         mEdit.setHint(mBuilder.getHintText());
         mEdit.setHintTextColor(mBuilder.getHintTextColor());
         if (mBuilder.getLines() != -1) {
-
             mEdit.setLines(mBuilder.getLines());
         }
         if (mBuilder.getMaxLines() != -1) {
-
             mEdit.setMaxLines(mBuilder.getMaxLines());
         }
         if (mBuilder.getMaxLength() != -1) {
-
-            mEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mBuilder.getMaxLength
-                    ())});
+            mEdit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mBuilder.getMaxLength())});
         }
-
     }
 
     public void show() {
-
         mDialog.show();
     }
 
     public void dismiss() {
-
         mDialog.dismiss();
     }
 
     @Override
     public void onClick(View view) {
-
         int i = view.getId();
         if (i == R.id.edit_dialog_leftbtn && mBuilder.getListener() != null) {
-
             mBuilder.getListener().clickLeftButton(mLeftBtn, mEdit.getText().toString());
             return;
         }
-
         if (i == R.id.edit_dialog_rightbtn && mBuilder.getListener() != null) {
-
             mBuilder.getListener().clickRightButton(mRightBtn, mEdit.getText().toString());
-            return;
         }
-
     }
 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
-
         mEdit.setText("");
     }
 
@@ -163,7 +142,6 @@ public class MDEditDialog implements View.OnClickListener, DialogInterface.OnDis
         private OnClickEditDialogListener listener;
 
         public Builder(Context context) {
-
             mContext = context;
             titleText = "提示";
             titleTextColor = ContextCompat.getColor(mContext, R.color.black_light);
@@ -307,7 +285,6 @@ public class MDEditDialog implements View.OnClickListener, DialogInterface.OnDis
         }
 
         public int getLineColor() {
-
             return lineColor;
         }
 
@@ -389,7 +366,6 @@ public class MDEditDialog implements View.OnClickListener, DialogInterface.OnDis
         }
 
         public MDEditDialog build() {
-
             return new MDEditDialog(this);
         }
     }
@@ -399,8 +375,5 @@ public class MDEditDialog implements View.OnClickListener, DialogInterface.OnDis
         void clickLeftButton(View view, String editText);
 
         void clickRightButton(View view, String editText);
-
     }
-
-
 }
