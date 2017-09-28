@@ -22,5 +22,4 @@
         android:text="@string/loading"
         android:textColor="?attr/dayNightOneTextColor"
         android:textSize="14sp" />
-
 </LinearLayout>
