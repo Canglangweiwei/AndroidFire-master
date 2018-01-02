@@ -15,17 +15,19 @@ import rx.Observable;
  * on 2016.09.14:38
  */
 public interface PhotoListContract {
+
     interface Model extends BaseModel {
-        //请求获取图片
-        Observable <List<PhotoGirl>> getPhotosListData(int size, int page);
+        // 请求获取图片
+        Observable<List<PhotoGirl>> getPhotosListData(int size, int page);
     }
 
     interface View extends BaseView {
-        //返回获取的图片
+        // 返回获取的图片
         void returnPhotosListData(List<PhotoGirl> photoGirls);
     }
-    abstract static class Presenter extends BasePresenter<View, Model> {
-        //发起获取图片请求
+
+    abstract class Presenter extends BasePresenter<View, Model> {
+        // 发起获取图片请求
         public abstract void getPhotosListDataRequest(int size, int page);
     }
 }

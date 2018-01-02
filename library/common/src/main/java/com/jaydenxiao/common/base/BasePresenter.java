@@ -13,13 +13,13 @@ import com.jaydenxiao.common.baserx.RxManager;
 public abstract class BasePresenter<T, E> {
 
     public Context mContext;
-    public E mModel;
-    public T mView;
+    public E mBasePresenterModel;
+    public T mBasePresenterRootView;
     public RxManager mRxManage = new RxManager();
 
     public void setVM(T v, E m) {
-        this.mView = v;
-        this.mModel = m;
+        this.mBasePresenterRootView = v;
+        this.mBasePresenterModel = m;
         this.onStart();
     }
 

@@ -485,7 +485,8 @@ public class CircleZoneActivity extends BaseActivity<CircleZonePresenter, ZoneMo
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            if (editTextBodyLl != null && editTextBodyLl.getVisibility() == View.VISIBLE) {
+            if (editTextBodyLl != null
+                    && editTextBodyLl.getVisibility() == View.VISIBLE) {
                 editTextBodyLl.setVisibility(View.GONE);
                 return true;
             }

@@ -25,7 +25,7 @@ public class NewsMainPresenter extends NewsMainContract.Presenter {
             @Override
             public void call(List<NewsChannelTable> newsChannelTables) {
                 if (newsChannelTables != null) {
-                    mView.returnMineNewsChannels(newsChannelTables);
+                    mBasePresenterRootView.returnMineNewsChannels(newsChannelTables);
                 }
             }
         });
@@ -33,11 +33,11 @@ public class NewsMainPresenter extends NewsMainContract.Presenter {
 
     @Override
     public void lodeMineChannelsRequest() {
-        mRxManage.add(mModel.lodeMineNewsChannels().subscribe(new RxSubscriber<List<NewsChannelTable>>(mContext, false) {
+        mRxManage.add(mBasePresenterModel.lodeMineNewsChannels().subscribe(new RxSubscriber<List<NewsChannelTable>>(mContext, false) {
 
             @Override
             protected void _onNext(List<NewsChannelTable> newsChannelTables) {
-                mView.returnMineNewsChannels(newsChannelTables);
+                mBasePresenterRootView.returnMineNewsChannels(newsChannelTables);
             }
 
             @Override

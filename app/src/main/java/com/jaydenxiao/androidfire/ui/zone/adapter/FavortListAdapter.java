@@ -70,7 +70,6 @@ public class FavortListAdapter {
         if (datas != null && datas.size() > 0) {
             // 添加点赞图标
             builder.append(setImageSpan());
-            // builder.append("  ");
             FavortItem item;
             for (int i = 0; i < datas.size(); i++) {
                 item = datas.get(i);

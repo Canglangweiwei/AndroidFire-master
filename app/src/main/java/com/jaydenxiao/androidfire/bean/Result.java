@@ -3,7 +3,6 @@ package com.jaydenxiao.androidfire.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 /**
  * des:接口返回数据基类
  * Created by xsf
@@ -54,6 +53,7 @@ public class Result implements Parcelable {
     }
 
     public Result() {
+        super();
     }
 
     protected Result(Parcel in) {

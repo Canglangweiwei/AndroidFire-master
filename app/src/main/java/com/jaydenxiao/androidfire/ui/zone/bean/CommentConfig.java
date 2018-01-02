@@ -16,7 +16,6 @@ public class CommentConfig {
         Type(String value) {
             this.value = value;
         }
-
     }
 
     public int circlePosition;
@@ -100,6 +99,4 @@ public class CommentConfig {
     public void setCommentType(Type commentType) {
         this.commentType = commentType;
     }
-
-
 }

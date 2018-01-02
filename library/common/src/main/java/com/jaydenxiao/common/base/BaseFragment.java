@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 //
 //    @Override
 //    public void initPresenter() {
-//        mPresenter.setVM(this, mModel);
+//        mPresenter.setVM(this, mBasePresenterModel);
 //    }
 //
 //    @Override

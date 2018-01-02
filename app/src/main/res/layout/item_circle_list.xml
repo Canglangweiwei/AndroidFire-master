@@ -19,8 +19,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginRight="8dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/nameTv"
@@ -28,11 +28,11 @@
             android:layout_height="48dp"
             android:layout_toRightOf="@+id/headIv"
             android:gravity="center"
+            android:maxLines="1"
             android:textColor="?attr/dayNightOneTextColor"
             android:textSize="@dimen/font_normal2"
             android:textStyle="bold"
-            tools:text="小崽子"
-            android:maxLines="1" />
+            tools:text="小崽子" />
 
         <TextView
             android:id="@+id/tv_order_situation"
@@ -40,12 +40,12 @@
             android:layout_height="48dp"
             android:layout_toRightOf="@+id/nameTv"
             android:gravity="center"
+            android:maxLines="1"
             android:paddingLeft="8dp"
             android:text="发单:10  接单:20"
             android:textColor="?attr/dayNightTwoTextColor"
             android:textSize="@dimen/font_small"
-            android:visibility="visible"
-            android:maxLines="1" />
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/timeTv"
@@ -56,10 +56,10 @@
             android:layout_toLeftOf="@+id/deleteBtn"
             android:layout_toRightOf="@+id/tv_order_situation"
             android:gravity="right"
+            android:maxLines="1"
             android:textColor="?attr/dayNightTwoTextColor"
             android:textSize="12sp"
-            tools:text="2015-01-10"
-            android:maxLines="1" />
+            tools:text="2015-01-10" />
 
         <TextView
             android:id="@+id/deleteBtn"
@@ -91,10 +91,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="?attr/dayNightTwoTextColor"
             android:textSize="14sp"
-            tools:text="分享了一个连接"
-            android:maxLines="1" />
+            tools:text="分享了一个连接" />
 
         <com.jaydenxiao.androidfire.ui.zone.widget.ExpandableTextView
             android:id="@+id/contentTv"
@@ -126,11 +126,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:ellipsize="end"
+                android:maxLines="1"
                 android:maxWidth="200dp"
                 android:textColor="?attr/dayNightTwoTextColor"
-                android:textSize="11sp"
-                tools:text="1.5km"
-                android:maxLines="1" />
+                android:textSize="12sp"
+                tools:text="1.5km" />
 
             <View
                 android:layout_width="0dip"
@@ -188,7 +188,7 @@
 
             <com.jaydenxiao.androidfire.ui.zone.widget.CommentListView
                 android:id="@+id/commentList"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
@@ -196,7 +196,6 @@
                 android:id="@+id/ll_comment"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/selector_gray_border"
                 android:gravity="center_vertical"

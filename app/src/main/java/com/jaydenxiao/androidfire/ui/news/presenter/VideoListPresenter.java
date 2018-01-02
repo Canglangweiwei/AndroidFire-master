@@ -24,7 +24,7 @@ public class VideoListPresenter extends VideosListContract.Presenter {
        mRxManage.on(AppConstant.NEWS_LIST_TO_TOP, new Action1<Object>() {
            @Override
            public void call(Object o) {
-            mView.scrolltoTop();
+            mBasePresenterRootView.scrolltoTop();
            }
        });
     }
@@ -36,21 +36,21 @@ public class VideoListPresenter extends VideosListContract.Presenter {
      */
     @Override
     public void getVideosListDataRequest(String type, int startPage) {
-        mRxManage.add(mModel.getVideosListData(type,startPage).subscribe(new RxSubscriber<List<VideoData>>(mContext,false) {
+        mRxManage.add(mBasePresenterModel.getVideosListData(type,startPage).subscribe(new RxSubscriber<List<VideoData>>(mContext,false) {
             @Override
             public void onStart() {
                 super.onStart();
-                mView.showLoading(mContext.getString(R.string.loading));
+                mBasePresenterRootView.showLoading(mContext.getString(R.string.loading));
             }
             @Override
             protected void _onNext(List<VideoData> videoDatas) {
-                mView.returnVideosListData(videoDatas);
-                mView.stopLoading();
+                mBasePresenterRootView.returnVideosListData(videoDatas);
+                mBasePresenterRootView.stopLoading();
             }
 
             @Override
             protected void _onError(String message) {
-                mView.showErrorTip(message);
+                mBasePresenterRootView.showErrorTip(message);
             }
         }));
     }

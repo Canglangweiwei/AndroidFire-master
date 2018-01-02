@@ -25,7 +25,7 @@ public class NewsListPresenter extends NewsListContract.Presenter {
         mRxManage.on(AppConstant.NEWS_LIST_TO_TOP, new Action1<Object>() {
             @Override
             public void call(Object o) {
-                mView.scrolltoTop();
+                mBasePresenterRootView.scrolltoTop();
             }
         });
     }
@@ -39,24 +39,24 @@ public class NewsListPresenter extends NewsListContract.Presenter {
      */
     @Override
     public void getNewsListDataRequest(String type, String id, int startPage) {
-        mRxManage.add(mModel.getNewsListData(type, id, startPage)
+        mRxManage.add(mBasePresenterModel.getNewsListData(type, id, startPage)
                 .subscribe(new RxSubscriber<List<NewsSummary>>(mContext, false) {
 
                     @Override
                     public void onStart() {
                         super.onStart();
-                        mView.showLoading(mContext.getString(R.string.loading));
+                        mBasePresenterRootView.showLoading(mContext.getString(R.string.loading));
                     }
 
                     @Override
                     protected void _onNext(List<NewsSummary> newsSummaries) {
-                        mView.returnNewsListData(newsSummaries);
-                        mView.stopLoading();
+                        mBasePresenterRootView.returnNewsListData(newsSummaries);
+                        mBasePresenterRootView.stopLoading();
                     }
 
                     @Override
                     protected void _onError(String message) {
-                        mView.showErrorTip(message);
+                        mBasePresenterRootView.showErrorTip(message);
                     }
                 }));
     }

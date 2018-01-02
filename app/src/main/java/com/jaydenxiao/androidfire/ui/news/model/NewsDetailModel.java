@@ -21,7 +21,7 @@ public class NewsDetailModel implements NewsDetailContract.Model {
 
     @Override
     public Observable<NewsDetail> getOneNewsData(final String postId) {
-        return Api.getDefault(HostType.NETEASE_NEWS_VIDEO).getNewDetail(Api.getCacheControl(),postId)
+        return Api.getDefault(HostType.NETEASE_NEWS_VIDEO).getNewDetail(Api.getCacheControl(), postId)
                 .map(new Func1<Map<String, NewsDetail>, NewsDetail>() {
                     @Override
                     public NewsDetail call(Map<String, NewsDetail> map) {
@@ -32,6 +32,7 @@ public class NewsDetailModel implements NewsDetailContract.Model {
                 })
                 .compose(RxSchedulers.<NewsDetail>io_main());
     }
+
     private void changeNewsDetail(NewsDetail newsDetail) {
         List<NewsDetail.ImgBean> imgSrcs = newsDetail.getImg();
         if (isChange(imgSrcs)) {
@@ -55,7 +56,6 @@ public class NewsDetailModel implements NewsDetailContract.Model {
                 newChars = "<img src=\"" + imgSrcs.get(i).getSrc() + "\" />";
             }
             newsBody = newsBody.replace(oldChars, newChars);
-
         }
         return newsBody;
     }

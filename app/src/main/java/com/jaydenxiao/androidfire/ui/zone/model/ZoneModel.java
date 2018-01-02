@@ -20,8 +20,6 @@ public class ZoneModel implements CircleZoneContract.Model {
 
     /**
      * 获取未读条数
-     *
-     * @return
      */
     @Override
     public Observable<String> getZoneNotReadNews() {

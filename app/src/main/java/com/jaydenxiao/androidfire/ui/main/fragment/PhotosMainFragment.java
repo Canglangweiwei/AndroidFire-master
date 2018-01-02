@@ -137,7 +137,7 @@ public class PhotosMainFragment extends BaseFragment<PhotosListPresenter, Photos
     public void onRefresh() {
         adapter.getPageBean().setRefresh(true);
         mStartPage = 0;
-        //发起请求
+        // 发起请求
         irc.setRefreshing(true);
         mPresenter.getPhotosListDataRequest(SIZE, mStartPage);
     }
@@ -145,7 +145,7 @@ public class PhotosMainFragment extends BaseFragment<PhotosListPresenter, Photos
     @Override
     public void onLoadMore(View loadMoreView) {
         adapter.getPageBean().setRefresh(false);
-        //发起请求
+        // 发起请求
         irc.setLoadMoreStatus(LoadMoreFooterView.Status.LOADING);
         mPresenter.getPhotosListDataRequest(SIZE, mStartPage);
     }

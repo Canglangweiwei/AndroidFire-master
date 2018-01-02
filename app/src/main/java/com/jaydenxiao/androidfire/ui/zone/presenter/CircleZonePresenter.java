@@ -50,7 +50,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
             @Override
             public void call(CircleItem circleItem) {
                 if (circleItem != null) {
-                    mView.setOnePublishData(circleItem);
+                    mBasePresenterRootView.setOnePublishData(circleItem);
                 }
             }
         });
@@ -61,7 +61,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
      */
     @Override
     public void getNotReadNewsCount() {
-        mRxManage.add(mModel.getZoneNotReadNews().subscribe(new Subscriber<String>() {
+        mRxManage.add(mBasePresenterModel.getZoneNotReadNews().subscribe(new Subscriber<String>() {
 
             @Override
             public void onCompleted() {
@@ -75,7 +75,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
 
             @Override
             public void onNext(String icon) {
-                mView.updateNotReadNewsCount(10, icon);
+                mBasePresenterRootView.updateNotReadNewsCount(10, icon);
             }
         }));
     }
@@ -87,17 +87,17 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
     public void getListData(String type, String userId, final int page, int rows) {
         // 加载更多不显示加载条
         if (page <= 1) {
-            mView.showLoading("加载中...");
+            mBasePresenterRootView.showLoading("加载中...");
         }
-        mRxManage.add(mModel.getListDatas(type, userId, page, rows).subscribe(new Subscriber<Result>() {
+        mRxManage.add(mBasePresenterModel.getListDatas(type, userId, page, rows).subscribe(new Subscriber<Result>() {
             @Override
             public void onCompleted() {
-                mView.stopLoading();
+                mBasePresenterRootView.stopLoading();
             }
 
             @Override
             public void onError(Throwable e) {
-                mView.showErrorTip("" + e.getMessage());
+                mBasePresenterRootView.showErrorTip("" + e.getMessage());
             }
 
             @Override
@@ -109,7 +109,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
                             circleItems.get(i).setPictures(DatasUtil.getRandomPhotoUrlString(new Random().nextInt(9)));
                         }
                         PageBean pageBean = JSON.parseObject(JsonUtils.getValue(result.getMsg(), "page"), PageBean.class);
-                        mView.setListData(circleItems, pageBean);
+                        mBasePresenterRootView.setListData(circleItems, pageBean);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -151,22 +151,22 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
                     @Override
                     public void clickRightButton(View view) {
                         mdAlertDialog.dismiss();
-                        mView.startProgressDialog();
-                        mRxManage.add(mModel.deleteCircle(circleId, position).subscribe(new Subscriber<Result>() {
+                        mBasePresenterRootView.startProgressDialog();
+                        mRxManage.add(mBasePresenterModel.deleteCircle(circleId, position).subscribe(new Subscriber<Result>() {
                             @Override
                             public void onCompleted() {
-                                mView.stopProgressDialog();
+                                mBasePresenterRootView.stopProgressDialog();
                             }
 
                             @Override
                             public void onError(Throwable e) {
-                                mView.startProgressDialog();
+                                mBasePresenterRootView.startProgressDialog();
                                 ToastUitl.showToastWithImg(mContext.getString(R.string.net_error), R.drawable.ic_wrong);
                             }
 
                             @Override
                             public void onNext(Result result) {
-                                mView.update2DeleteCircle(circleId, position);
+                                mBasePresenterRootView.update2DeleteCircle(circleId, position);
                             }
                         }));
                     }
@@ -182,12 +182,12 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
      */
     @Override
     public void addFavort(final String publishId, final String publishUserId, final int circlePosition, final View view) {
-        mView.startProgressDialog();
-        mRxManage.add(mModel.addFavort(publishId, publishUserId).subscribe(new Subscriber<Result>() {
+        mBasePresenterRootView.startProgressDialog();
+        mRxManage.add(mBasePresenterModel.addFavort(publishId, publishUserId).subscribe(new Subscriber<Result>() {
 
             @Override
             public void onCompleted() {
-                mView.stopProgressDialog();
+                mBasePresenterRootView.stopProgressDialog();
             }
 
             @Override
@@ -205,7 +205,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
                     mGoodView.setImage(R.drawable.dianzan);
                     mGoodView.show(view);
                     FavortItem item = new FavortItem(publishId, AppCache.getInstance().getUserId(), "jayden");
-                    mView.update2AddFavorite(circlePosition, item);
+                    mBasePresenterRootView.update2AddFavorite(circlePosition, item);
                 }
             }
         }));
@@ -218,12 +218,12 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
      */
     @Override
     public void deleteFavort(final String publishId, final String publishUserId, final int circlePosition) {
-        mView.startProgressDialog();
-        mRxManage.add(mModel.deleteFavort(publishId, publishUserId).subscribe(new Subscriber<Result>() {
+        mBasePresenterRootView.startProgressDialog();
+        mRxManage.add(mBasePresenterModel.deleteFavort(publishId, publishUserId).subscribe(new Subscriber<Result>() {
 
             @Override
             public void onCompleted() {
-                mView.stopProgressDialog();
+                mBasePresenterRootView.stopProgressDialog();
             }
 
             @Override
@@ -234,7 +234,7 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
             @Override
             public void onNext(Result result) {
                 if (result != null) {
-                    mView.update2DeleteFavort(circlePosition, AppCache.getInstance().getUserId());
+                    mBasePresenterRootView.update2DeleteFavort(circlePosition, AppCache.getInstance().getUserId());
                 }
             }
         }));
@@ -251,24 +251,27 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
         if (config == null) {
             return;
         }
-        mView.startProgressDialog();
-        mRxManage.add(mModel.addComment(config.getPublishUserId(), new CommentItem(config.getName(), config.getId(), content, config.getPublishId(), AppCache.getInstance().getUserId(), "jayden")).subscribe(new Subscriber<Result>() {
+        mBasePresenterRootView.startProgressDialog();
+        mRxManage.add(mBasePresenterModel.addComment(config.getPublishUserId(),
+                new CommentItem(config.getName(), config.getId(), content, config.getPublishId(),
+                        AppCache.getInstance().getUserId(), "jayden")).subscribe(new Subscriber<Result>() {
 
             @Override
             public void onCompleted() {
-                mView.stopProgressDialog();
+                mBasePresenterRootView.stopProgressDialog();
             }
 
             @Override
             public void onError(Throwable e) {
-                mView.stopProgressDialog();
+                mBasePresenterRootView.stopProgressDialog();
                 ToastUitl.showToastWithImg(mContext.getString(R.string.net_error), R.drawable.ic_wrong);
             }
 
             @Override
             public void onNext(Result result) {
                 if (result != null) {
-                    mView.update2AddComment(config.circlePosition, new CommentItem(config.getName(), config.getId(), content, config.getPublishId(), AppCache.getInstance().getUserId(), "锋"));
+                    mBasePresenterRootView.update2AddComment(config.circlePosition, new CommentItem(config.getName(), config.getId(),
+                            content, config.getPublishId(), AppCache.getInstance().getUserId(), "锋"));
                 }
             }
         }));
@@ -282,23 +285,23 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
      */
     @Override
     public void deleteComment(final int circlePosition, final String commentId, final int commentPosition) {
-        mView.startProgressDialog();
-        mRxManage.add(mModel.deleteComment(commentId).subscribe(new Subscriber<Result>() {
+        mBasePresenterRootView.startProgressDialog();
+        mRxManage.add(mBasePresenterModel.deleteComment(commentId).subscribe(new Subscriber<Result>() {
 
             @Override
             public void onCompleted() {
-                mView.stopProgressDialog();
+                mBasePresenterRootView.stopProgressDialog();
             }
 
             @Override
             public void onError(Throwable e) {
-                mView.stopProgressDialog();
+                mBasePresenterRootView.stopProgressDialog();
                 ToastUitl.showToastWithImg(mContext.getString(R.string.net_error), R.drawable.ic_wrong);
             }
 
             @Override
             public void onNext(Result result) {
-                mView.update2DeleteComment(circlePosition, commentId, commentPosition);
+                mBasePresenterRootView.update2DeleteComment(circlePosition, commentId, commentPosition);
             }
         }));
     }
@@ -310,6 +313,6 @@ public class CircleZonePresenter extends CircleZoneContract.Presenter {
      */
     @Override
     public void showEditTextBody(CommentConfig commentConfig) {
-        mView.updateEditTextBodyVisible(View.VISIBLE, commentConfig);
+        mBasePresenterRootView.updateEditTextBodyVisible(View.VISIBLE, commentConfig);
     }
 }

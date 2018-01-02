@@ -11,14 +11,15 @@ import java.lang.reflect.Type;
 
 /**
  * JSON解析二次封装
- *
  */
+@SuppressWarnings("ALL")
 public class JsonUtils {
 
     // 采取单例模式
     private static Gson gson = new Gson();
 
     private JsonUtils() {
+        super();
     }
 
     /**
@@ -40,11 +41,7 @@ public class JsonUtils {
     }
 
     /**
-     * @param json
-     * @param classOfT
-     * @return
-     * @MethodName : fromJson
-     * @Description : 用来将JSON串转为对象，但此方法不可用来转带泛型的集合
+     * 用来将JSON串转为对象，但此方法不可用来转带泛型的集合
      */
     public static <T> Object fromJson(String json, Class<T> classOfT) {
         try {
@@ -56,11 +53,7 @@ public class JsonUtils {
     }
 
     /**
-     * @param json
-     * @param typeOfT
-     * @return
-     * @MethodName : fromJson
-     * @Description : 用来将JSON串转为对象，此方法可用来转带泛型的集合，如：Type为 new
+     * 用来将JSON串转为对象，此方法可用来转带泛型的集合，如：Type为 new
      * TypeToken<List<T>>(){}.getType()
      * ，其它类也可以用此方法调用，就是将List<T>替换为你想要转成的类
      */
@@ -75,10 +68,6 @@ public class JsonUtils {
 
     /**
      * 获取json中的某个值
-     *
-     * @param json
-     * @param key
-     * @return
      */
     public static String getValue(String json, String key) {
         try {
@@ -92,9 +81,6 @@ public class JsonUtils {
 
     /**
      * 获取json中的list值
-     *
-     * @param json
-     * @return
      */
     public static String getListValue(String json) {
         try {
@@ -115,6 +101,7 @@ public class JsonUtils {
         }
         return null;
     }
+
     public static int getIntValue(String json, String key) {
         try {
             JSONObject object = new JSONObject(json);
@@ -124,5 +111,4 @@ public class JsonUtils {
         }
         return 0;
     }
-
 }
